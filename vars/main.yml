@@ -1,0 +1,15 @@
+new_users:
+    - centos
+docker_users:
+    - centos
+dockerminio_user: centos
+
+MINIO_HOMEVOLUME:./data
+MINIO_ACCESS_KEY:YM2NYV7K2D5DCS2CSTDX
+MINIO_SECRET_KEY:DXrHFPCn8XtHRx4cMA5TXaVrFMY3dHuvFgBPk
+MINIO_S3URL:http://minio.example.com
+
+#proxy_env:
+#    http_proxy: http://proxy-dev.com:8080
+#    https_proxy: http://proxy-dev.com:8080
+#    no_proxy: 127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,docker-registry

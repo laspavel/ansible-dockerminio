@@ -1,0 +1,46 @@
+---
+- name: Install CA Certificates package
+  become: true
+  package:
+    name: ca-certificates
+    state: present
+
+- name: "Check CA Trust Expansion state"
+  become: true
+  command: "/usr/bin/update-ca-trust check"
+  check_mode: false
+  changed_when: false
+  register: result
+
+- name: "Set CA Trust fact"
+  set_fact:
+    ca_trust_expanded: "{{ result.stdout.find( 'PEM/JAVA Status: ENABLED.') != -1 }}"
+
+- name: "Enable CA Trust Expansion"
+  become: true
+  command: update-ca-trust enable
+  when: not ca_trust_expanded
+
+- name: Install trusted CA Certificates
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ca_certificates_local_dir }}"
+    group: root
+    mode: '0644'
+    owner: root
+  with_fileglob:
+      - "*.pem"
+  register: _ca_certificates_copied
+  notify: update ca-certificates
+
+- name: Update CA Certificates
+  become: true
+  command: "{{ ca_certificates_handler }}"
+  when:
+    - _ca_certificates_copied is changed
+    - ca_certificates_update | bool
+
+- name: Unconditionally reboot the machine
+  reboot:
+    reboot_timeout: 120

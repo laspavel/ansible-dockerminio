@@ -1,0 +1,4 @@
+---
+ca_certificates_update: true
+ca_certificates_local_dir: /etc/pki/ca-trust/source/anchors
+ca_certificates_handler: /usr/bin/update-ca-trust extract

@@ -1,0 +1,33 @@
+---
+- name: Create minio directory
+  file:
+    state: directory
+    owner: "{{ dockerminio_user }}"
+    group: "{{ dockerminio_user }}"
+    mode: 0755
+    dest: /home/{{ docker_miniouser }}/minio
+
+- name: Copy .env
+  template:
+    src: '.env.j2'
+    dest: '/home/{{ docker_miniouser }}/minio/.env'
+    owner: "{{ dockerminio_user }}"
+    group: "{{ dockerminio_user }}"
+    mode: '0755'
+  ignore_errors: true
+
+- name: Copy docker-compose.yml
+  template:
+    src: 'docker-compose.yml.j2'
+    dest: '/home/{{ docker_miniouser }}/minio/docker-compose.yml'
+    owner: "{{ dockerminio_user }}"
+    group: "{{ dockerminio_user }}"
+    mode: '0755'
+  ignore_errors: true
+
+- name: Start Docker Minio container
+  command: "{{ docker_compose_path }} -f /home/{{ dockerminio_user }}/minio/docker-compose.yml up -d"
+  become: yes
+  become_user: "{{ dockerminio_user }}"
+  ignore_errors: true
+

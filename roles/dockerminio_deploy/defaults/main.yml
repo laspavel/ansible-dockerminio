@@ -1,0 +1,6 @@
+---
+docker_compose_path: /usr/local/bin/docker-compose
+MINIO_HOMEVOLUME:./data
+MINIO_ACCESS_KEY:YM2NYV7K2D5DCS2CSTDX
+MINIO_SECRET_KEY:DXrHFPCn8XtHRx4cMA5TXaVrFMY3dHuvFgBPk
+MINIO_S3URL:http://minio.example.com

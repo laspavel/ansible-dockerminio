@@ -1,0 +1,16 @@
+---
+- name: DockerMinioPlaybook
+  hosts: dockerminiohosts
+  become: true
+  remote_user: root
+  gather_facts: true
+  vars_files:
+    - ./vars/main.yml
+  roles:
+#    - role: base
+#    - role: ca-certificates
+    - role: add_users
+#    - role: sysctl
+    - role: docker
+    - role: dockerminio_deploy
+  environment: "{{ proxy_env }}"
