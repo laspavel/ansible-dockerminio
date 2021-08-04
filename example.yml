@@ -10,7 +10,7 @@
 #    - role: base
 #    - role: ca-certificates
     - role: add_users
-#    - role: sysctl
+    - role: sysctl
     - role: docker
     - role: dockerminio_deploy
   environment: "{{ proxy_env }}"

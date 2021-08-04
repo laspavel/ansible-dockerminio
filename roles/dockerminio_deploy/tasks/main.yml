@@ -5,21 +5,12 @@
     owner: "{{ dockerminio_user }}"
     group: "{{ dockerminio_user }}"
     mode: 0755
-    dest: /home/{{ docker_miniouser }}/minio
-
-- name: Copy .env
-  template:
-    src: '.env.j2'
-    dest: '/home/{{ docker_miniouser }}/minio/.env'
-    owner: "{{ dockerminio_user }}"
-    group: "{{ dockerminio_user }}"
-    mode: '0755'
-  ignore_errors: true
+    dest: /home/{{ dockerminio_user }}/minio
 
 - name: Copy docker-compose.yml
   template:
     src: 'docker-compose.yml.j2'
-    dest: '/home/{{ docker_miniouser }}/minio/docker-compose.yml'
+    dest: '/home/{{ dockerminio_user }}/minio/docker-compose.yml'
     owner: "{{ dockerminio_user }}"
     group: "{{ dockerminio_user }}"
     mode: '0755'

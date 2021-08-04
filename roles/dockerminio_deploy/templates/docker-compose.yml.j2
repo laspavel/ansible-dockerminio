@@ -4,15 +4,16 @@ services:
     image: minio/minio
     hostname: minio-1
     volumes:
-      - ${HOMEVOLUME:-./data}:/export
+      - {{ MINIO_HOMEVOLUME }}:/export
     ports:
       - 9000:9000
     environment:
-      MINIO_ACCESS_KEY: ${ACCESS_KEY}
-      MINIO_SECRET_KEY: ${SECRET_KEY}
+      MINIO_ROOT_USER: {{ MINIO_ACCESS_KEY }}
+      MINIO_ROOT_PASSWORD: {{ MINIO_SECRET_KEY }}
     command: server /export
     healthcheck:
-      test: ["CMD", "curl", "-f", "${S3URL}/minio/health/live"]
+      test: ["CMD", "curl", "-f", "{{ MINIO_S3URL }}/minio/health/live"]
       interval: 30s
       timeout: 20s
       retries: 3
+
