@@ -21,6 +21,12 @@
     dest: /home/{{ item }}/.ssh/
   with_items: "{{ new_users }}"
 
+#- name: Check that the id_rsa.pub exists
+#  delegate_to: localhost
+#  stat:
+#    path: id_rsa.pub
+#    register: stat_result
+
 - name: Pushes rsa key to user home directory
   copy:
     src: id_rsa.pub
@@ -29,3 +35,4 @@
     mode: 0600
   with_items: "{{ new_users }}"
   ignore_errors: true
+#  when: not stat_result.stat.exists

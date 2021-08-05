@@ -5,14 +5,11 @@ docker_users:
 dockerminio_user: centos
 
 MINIO_HOMEVOLUME: ./data
-MINIO_ACCESS_KEY: YM2NYV7K2D5DCS2CSTDX
-MINIO_SECRET_KEY: DXrHFPCn8XtHRx4cMA5TXaVrFMY3dHuvFgBPk
-MINIO_S3URL: http://minio.example.com
+MINIO_ACCESS_KEY: YM2NYV7K2D5DCS2CSFZ
+MINIO_SECRET_KEY: DXrHFPCn8XtHRx4cMA5TXaVrFMY3dHuvAYBvd
+MINIO_S3HOST: minio.example.com
+MINIO_S3URL: http://{{ MINIO_S3HOST }}
 
-#proxy_env:
-#    http_proxy: http://proxy-dev.com:8080
-#    https_proxy: http://proxy-dev.com:8080
-#    no_proxy: 127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,docker-registry
 proxy_env:
     http_proxy: ""
     https_proxy: ""

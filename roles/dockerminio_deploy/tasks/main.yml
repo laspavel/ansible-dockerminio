@@ -17,8 +17,10 @@
   ignore_errors: true
 
 - name: Start Docker Minio container
-  command: "{{ docker_compose_path }} -f /home/{{ dockerminio_user }}/minio/docker-compose.yml up -d"
+  command: "{{ docker_compose_path }} up -d"
   become: yes
   become_user: "{{ dockerminio_user }}"
+  args:
+    chdir: "/home/{{ dockerminio_user }}/minio/"
   ignore_errors: true
 

@@ -1,6 +1,7 @@
 *.key
 *.crt
 *.pem
+*.bak
 id_rsa.pub
 dist/
 .idea/

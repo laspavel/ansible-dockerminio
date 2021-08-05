@@ -11,6 +11,7 @@
 #    - role: ca-certificates
     - role: add_users
     - role: sysctl
+    - role: s3-nginx
     - role: docker
     - role: dockerminio_deploy
   environment: "{{ proxy_env }}"
